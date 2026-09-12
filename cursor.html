@@ -1,0 +1,89 @@
+
+<style>
+    /* Hide default cursor */
+body{
+    cursor:none;
+}
+
+
+/* Main cursor circle */
+.cursor{
+
+    width:40px;
+    height:40px;
+    border:2px solid #2997ff;
+    border-radius:50%;
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    transition:
+    width .3s,
+    height .3s,
+    background .3s;
+    z-index:9999;
+}
+
+
+/* Small center dot */
+.cursor-dot{
+    width:8px;
+    height:8px;
+    background:#2997ff;
+    border-radius:50%;
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:10000;
+
+}
+</style>
+
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+
+
+<script>
+    const cursor = document.querySelector(".cursor");
+const dot = document.querySelector(".cursor-dot");
+
+
+window.addEventListener("mousemove",(e)=>{
+
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+
+    dot.style.left = e.clientX + "px";
+    dot.style.top = e.clientY + "px";
+
+
+});
+
+
+// Hover animation on buttons and links
+
+const hoverElements = document.querySelectorAll(
+    "a, button, img"
+);
+hoverElements.forEach(element=>{
+    element.addEventListener("mouseenter",()=>{
+        cursor.style.width="70px";
+        cursor.style.height="70px";
+        cursor.style.background="rgba(41,151,255,.2)";
+
+    });
+    element.addEventListener("mouseleave",()=>{
+        cursor.style.width="40px";
+        cursor.style.height="40px";
+        cursor.style.background="transparent";
+
+    });
+
+
+});
+</script>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Hero Slider</title>
+
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<style>*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+overflow:hidden;
+}
+
+.swiper{
+width:100%;
+height:100vh;
+}
+
+.swiper-slide{
+
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.overlay{
+
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.25);
+
+}
+
+.content{
+
+position:relative;
+z-index:2;
+
+height:100%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:80px;
+}
+
+.left{
+
+width:40%;
+color:white;
+}
+
+.left h1{
+
+font-size:80px;
+line-height:80px;
+letter-spacing:2px;
+
+margin-bottom:20px;
+}
+
+.left p{
+
+font-size:18px;
+margin-bottom:25px;
+line-height:30px;
+}
+
+button{
+
+padding:15px 40px;
+border:none;
+border-radius:40px;
+background:#ffffff;
+cursor:pointer;
+font-size:16px;
+transition:.4s;
+}
+
+button:hover{
+
+transform:scale(1.05);
+}
+
+.cards{
+
+display:flex;
+gap:20px;
+align-self:flex-end;
+margin-bottom:60px;
+}
+
+.card{
+
+width:170px;
+height:280px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(15px);
+
+border-radius:18px;
+
+overflow:hidden;
+
+transition:.5s;
+
+cursor:pointer;
+}
+
+.card:hover{
+
+transform:translateY(-20px);
+}
+
+.card img{
+
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card h3{
+
+color:white;
+padding:15px;
+font-size:18px;
+}</style>
+
+</head>
+<body>
+
+<div class="swiper heroSlider">
+
+<div class="swiper-wrapper">
+
+<div class="swiper-slide"
+style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1600');">
+
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="left">
+
+<h1>AUSTRIA<br>ISLAND</h1>
+
+<p>
+Experience breathtaking mountains,
+crystal lakes and peaceful forests.
+A perfect place for your next adventure.
+</p>
+
+<button>Explore</button>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500">
+<h3>Japan</h3>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500">
+<h3>Norway</h3>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500">
+<h3>Yosemite</h3>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="swiper-slide"
+style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600');">
+
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="left">
+
+<h1>SWISS<br>ALPS</h1>
+
+<p>
+Explore snow-covered peaks,
+beautiful rivers and unforgettable scenery.
+</p>
+
+<button>Discover</button>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=500">
+<h3>Mountain</h3>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=500">
+<h3>Forest</h3>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=500">
+<h3>Lake</h3>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="swiper-pagination"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>new Swiper(".heroSlider",{
+
+loop:true,
+
+speed:1200,
+
+effect:"fade",
+
+fadeEffect:{
+crossFade:true
+},
+
+autoplay:{
+
+delay:1500,
+disableOnInteraction:false,
+
+},
+
+pagination:{
+
+el:".swiper-pagination",
+clickable:true,
+
+}
+
+});</script>
+
+</body>
+</html>

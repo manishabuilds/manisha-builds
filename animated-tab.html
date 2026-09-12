@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Number Dashboard</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      min-height: 100vh;
+      background: #0f172a;
+      color: white;
+      padding: 40px;
+    }
+
+    .dashboard {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 25px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1e293b, #111827);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 15px 40px rgba(0,0,0,.25);
+      transition: transform .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .label {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .number {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .change {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #22c55e;
+    }
+
+    .bar {
+      height: 5px;
+      margin-top: 20px;
+      border-radius: 10px;
+      background: #334155;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #6366f1, #22d3ee);
+      animation: growBar 1.5s ease forwards;
+    }
+
+    @keyframes growBar {
+      to {
+        width: var(--progress);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard">
+    <h1>Dashboard</h1>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="label">Total Users</div>
+        <div class="number" data-target="12850">0</div>
+        <div class="change">↑ 12.5% this month</div>
+        <div class="bar">
+          <span style="--progress: 82%"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Revenue</div>
+        <div class="number" data-target="75420" data-prefix="$">$0</div>
+        <div class="change">↑ 8.4% this month</div>
+        <div class="bar">
+          <span style="--progress: 74%"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Orders</div>
+        <div class="number" data-target="4386">0</div>
+        <div class="change">↑ 16.2% this month</div>
+        <div class="bar">
+          <span style="--progress: 65%"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Conversion</div>
+        <div class="number" data-target="87" data-suffix="%">0%</div>
+        <div class="change">↑ 5.8% this month</div>
+        <div class="bar">
+          <span style="--progress: 87%"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const counters = document.querySelectorAll(".number");
+
+    counters.forEach(counter => {
+      const target = Number(counter.dataset.target);
+      const prefix = counter.dataset.prefix || "";
+      const suffix = counter.dataset.suffix || "";
+
+      let start = 0;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function animate(currentTime) {
+        const progress = Math.min(
+          (currentTime - startTime) / duration,
+          1
+        );
+
+        // Smooth ease-out animation
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const value = Math.floor(eased * target);
+
+        counter.textContent =
+          prefix +
+          value.toLocaleString() +
+          suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    });
+  </script>
+
+</body>
+</html>

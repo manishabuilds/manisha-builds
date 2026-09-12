@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>3D Interactive Cube</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      color: white;
+
+      background:
+        radial-gradient(circle at 50% 40%, #172554 0%, transparent 35%),
+        radial-gradient(circle at 20% 80%, #4c1d95 0%, transparent 30%),
+        #020617;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Background glow */
+
+    .glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+
+      background: #06b6d4;
+      filter: blur(180px);
+      opacity: 0.12;
+
+      pointer-events: none;
+    }
+
+    /* Main content */
+
+    .hero {
+      position: relative;
+      z-index: 2;
+
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .badge {
+      padding: 8px 18px;
+
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+
+      color: #67e8f9;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 800;
+      line-height: 1;
+
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #67e8f9,
+        #a78bfa,
+        #ffffff
+      );
+
+      background-size: 300%;
+      -webkit-background-clip: text;
+      color: transparent;
+
+      animation: gradient 6s ease infinite;
+    }
+
+    .subtitle {
+      max-width: 600px;
+      color: #94a3b8;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* 3D Scene */
+
+    .scene {
+      width: 240px;
+      height: 240px;
+
+      perspective: 1000px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cube {
+      width: 180px;
+      height: 180px;
+
+      position: relative;
+
+      transform-style: preserve-3d;
+
+      transition:
+        transform 0.12s cubic-bezier(.2,.8,.2,1);
+
+      animation: float 5s ease-in-out infinite;
+    }
+
+    /* Cube faces */
+
+    .face {
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+
+      color: white;
+
+      border: 1px solid rgba(103,232,249,0.7);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(34,211,238,0.16),
+          rgba(139,92,246,0.08)
+        );
+
+      backdrop-filter: blur(5px);
+
+      box-shadow:
+        inset 0 0 35px rgba(34,211,238,0.08),
+        0 0 25px rgba(34,211,238,0.25);
+
+      overflow: hidden;
+    }
+
+    .face::before {
+      content: "";
+
+      position: absolute;
+      width: 100%;
+      height: 2px;
+
+      top: 0;
+      left: 0;
+
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #22d3ee,
+        transparent
+      );
+
+      animation: scan 3s linear infinite;
+    }
+
+    .front {
+      transform: translateZ(90px);
+    }
+
+    .back {
+      transform: rotateY(180deg) translateZ(90px);
+    }
+
+    .right {
+      transform: rotateY(90deg) translateZ(90px);
+    }
+
+    .left {
+      transform: rotateY(-90deg) translateZ(90px);
+    }
+
+    .top {
+      transform: rotateX(90deg) translateZ(90px);
+    }
+
+    .bottom {
+      transform: rotateX(-90deg) translateZ(90px);
+    }
+
+    /* Cube shadow */
+
+    .shadow {
+      position: absolute;
+
+      width: 180px;
+      height: 50px;
+
+      bottom: -45px;
+
+      background: #06b6d4;
+
+      filter: blur(35px);
+      opacity: 0.25;
+
+      transform: rotateX(70deg);
+    }
+
+    /* Button */
+
+    .button {
+      padding: 14px 28px;
+
+      border-radius: 12px;
+
+      border: 1px solid rgba(103,232,249,0.4);
+
+      color: white;
+      text-decoration: none;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(34,211,238,0.15),
+          rgba(139,92,246,0.15)
+        );
+
+      box-shadow:
+        0 0 20px rgba(34,211,238,0.1);
+
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+
+      border-color: #22d3ee;
+
+      box-shadow:
+        0 0 30px rgba(34,211,238,0.3);
+    }
+
+    /* Particles */
+
+    .particle {
+      position: fixed;
+
+      width: 3px;
+      height: 3px;
+
+      background: #67e8f9;
+      border-radius: 50%;
+
+      box-shadow: 0 0 10px #67e8f9;
+
+      animation: particle 8s linear infinite;
+
+      opacity: 0.5;
+    }
+
+    /* Animations */
+
+    @keyframes float {
+      0%, 100% {
+        translate: 0 0;
+      }
+
+      50% {
+        translate: 0 -12px;
+      }
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0%;
+      }
+
+      50% {
+        background-position: 100%;
+      }
+
+      100% {
+        background-position: 0%;
+      }
+    }
+
+    @keyframes scan {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(180px);
+      }
+    }
+
+    @keyframes particle {
+      from {
+        transform: translateY(100vh);
+      }
+
+      to {
+        transform: translateY(-100vh);
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+
+      .hero {
+        gap: 25px;
+        padding: 20px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .scene {
+        width: 200px;
+        height: 200px;
+      }
+
+      .cube {
+        width: 150px;
+        height: 150px;
+      }
+
+      .face {
+        width: 150px;
+        height: 150px;
+      }
+
+      .front {
+        transform: translateZ(75px);
+      }
+
+      .back {
+        transform: rotateY(180deg) translateZ(75px);
+      }
+
+      .right {
+        transform: rotateY(90deg) translateZ(75px);
+      }
+
+      .left {
+        transform: rotateY(-90deg) translateZ(75px);
+      }
+
+      .top {
+        transform: rotateX(90deg) translateZ(75px);
+      }
+
+      .bottom {
+        transform: rotateX(-90deg) translateZ(75px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow"></div>
+
+  <!-- Background particles -->
+  <div class="particle" style="left:10%; animation-delay:0s"></div>
+  <div class="particle" style="left:25%; animation-delay:2s"></div>
+  <div class="particle" style="left:45%; animation-delay:4s"></div>
+  <div class="particle" style="left:65%; animation-delay:1s"></div>
+  <div class="particle" style="left:80%; animation-delay:3s"></div>
+  <div class="particle" style="left:90%; animation-delay:5s"></div>
+
+  <main class="hero">
+
+    <div class="badge">
+      Interactive Experience
+    </div>
+
+    <div>
+      <h1>Explore 3D</h1>
+
+      <p class="subtitle">
+        Move your mouse around and watch the cube respond.
+        A modern interactive element built entirely with HTML, CSS and JavaScript.
+      </p>
+    </div>
+
+    <div class="scene">
+
+      <div class="cube" id="cube">
+
+        <div class="face front">FRONT</div>
+        <div class="face back">BACK</div>
+        <div class="face right">RIGHT</div>
+        <div class="face left">LEFT</div>
+        <div class="face top">TOP</div>
+        <div class="face bottom">BOTTOM</div>
+
+      </div>
+
+      <div class="shadow"></div>
+
+    </div>
+
+    <a href="#" class="button">
+      Discover More →
+    </a>
+
+  </main>
+
+  <script>
+    const cube = document.getElementById("cube");
+
+    let targetX = 25;
+    let targetY = -15;
+
+    let currentX = targetX;
+    let currentY = targetY;
+
+    document.addEventListener("mousemove", (event) => {
+
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
+
+      targetY = x * 70;
+      targetX = -y * 70;
+
+    });
+
+    function animate() {
+
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      cube.style.transform =
+        `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="background">
+        <div class="blob one"></div>
+        <div class="blob two"></div>
+        <div class="blob three"></div>
+    </div>
+    <div class="auth-wrapper">
+        <section class="welcome">
+            <div class="logo">
+                ✦
+            </div>
+            <h1>Welcome to <span class="gradient-text">Nova.</span></h1>
+            <p> Build your future with a beautiful, simple and
+        powerful digital experience.</p>
+
+        <div class="features">
+            <div class="feature">
+                <span class="check">✓</span>
+                Secure and private
+            </div>
+            
+            <div class="feature">
+                <span class="check">✓</span>
+                Works on every device
+            </div>
+            <div class="feature">
+                <span class="check">✓</span>
+                Fast and easy to use
+            </div>
+            
+        </div>
+        </section>
+
+<section class="form-area">
+    <div class="form-container">
+        <div class="tabs">
+            <button class="tab-active"
+            onclick="showForm('login', this)">
+                Login
+            </button>
+
+            <button class="tab"
+            onclick="showForm('signup', this)">
+                Sign Up
+            </button>
+        </div>
+
+        <form
+        id="login"
+        class="form active"
+        onsubmit="handleSubmit(event, 'login')">
+
+            <h2>Welcome Back</h2>
+            <p>
+                Enter your details to continue.
+            </p>
+            <div class="input-group">
+                <span class="icon"></span>
+                <input type="email" placeholder=" " required>
+                <label> Email Address</label>
+            </div>
+
+
+            <div class="input-group">
+                <span class="icon"></span>
+
+                <input id="loginPassword"
+                type="password"
+                placeholder=" "
+                required>
+
+                <label>Password</label>
+
+                <button class="password-toggle"
+                type="button"
+                onclick="togglePassword('loginPassword', this)">
+
+                </button>
+
+            </div>
+            <div class="options">
+                <label class="remember">
+                    <input type="checkbox">
+                    Remember Me
+                </label>
+
+                <a href="#">Forget Password?</a>
+            </div>
+
+            <button class="submit-button">
+                Login
+            </button>
+        </form>
+
+        <form id="signup" class="form"
+        onsubmit="handleSubmit(event, 'signup')">
+        <h2>Create Account</h2>
+        <p class="form-description">
+            Join us and start your journey
+        </p>
+
+        <div class="input-group">
+            <span class="icon"></span>
+            <input type="text"
+            placeholder=" "
+            required>
+            <label>Full name</label>
+        </div>
+        <div class="input-group">
+            <span class="icon"></span>
+            <input type="email"
+            placeholder=" "
+            required>
+            <label>Email address</label>
+        </div>
+        <div class="input-group">
+            <span class="icon"></span>
+            <input type="password"
+            id="signupPassword"
+            placeholder=" "
+            required>
+            <label>Create Password</label>
+
+            <button class="password-toggle"
+            type="button"
+            onclick="togglePassword('signupPassword', this)">
+
+            </button>
+        </div>
+
+        <button class="submit-btn">
+            Create Account
+        </button>
+
+
+        </form>
+
+        <div class="divider">
+            OR CONTINUE WITH
+        </div>
+
+<div class="social">
+    <button type="button">
+        Google
+    </button>
+    <button type="button">
+        Github
+    </button>
+</div>    </div>
+</section>
+
+
+    </div>
+</body>
+</html>
