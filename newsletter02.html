@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Newsletter Subscription</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+
+    :root {
+      --dark: #17231f;
+      --dark-2: #22332d;
+      --green: #3f8f6b;
+      --green-dark: #2f7355;
+      --cream: #f7f4ec;
+      --cream-dark: #ebe6d9;
+      --white: #ffffff;
+      --text: #26332e;
+      --muted: #738078;
+      --border: #dce2dc;
+      --success: #29966b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 30px 20px;
+
+      font-family: "DM Sans", sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 10% 15%,
+          rgba(63, 143, 107, 0.12),
+          transparent 25%
+        ),
+        #f3f1ea;
+
+      color: var(--text);
+    }
+
+
+    /* =====================================
+       NEWSLETTER
+    ===================================== */
+
+    .newsletter {
+      width: 100%;
+      max-width: 1080px;
+
+      position: relative;
+      overflow: hidden;
+
+      border-radius: 30px;
+
+      background: var(--cream);
+
+      box-shadow:
+        0 30px 80px rgba(23, 35, 31, 0.15);
+
+      border: 1px solid rgba(23, 35, 31, 0.06);
+    }
+
+
+    /* =====================================
+       DECORATION
+    ===================================== */
+
+    .circle-one {
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(63, 143, 107, 0.15);
+
+      top: -150px;
+      right: -80px;
+    }
+
+    .circle-two {
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border-radius: 50%;
+
+      background: rgba(63, 143, 107, 0.06);
+
+      bottom: -80px;
+      left: -70px;
+    }
+
+
+    /* =====================================
+       GRID
+    ===================================== */
+
+    .newsletter-content {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+
+      grid-template-columns: 1.1fr 0.9fr;
+
+      min-height: 470px;
+    }
+
+
+    /* =====================================
+       LEFT
+    ===================================== */
+
+    .newsletter-text {
+      padding: 70px 55px;
+    }
+
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+      gap: 8px;
+
+      color: var(--green);
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+    }
+
+
+    .eyebrow::before {
+      content: "";
+
+      width: 25px;
+      height: 2px;
+
+      background: var(--green);
+
+      border-radius: 10px;
+    }
+
+
+    .newsletter-text h1 {
+      font-family: "Playfair Display", serif;
+
+      color: var(--dark);
+
+      font-size: clamp(40px, 5vw, 62px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.5px;
+
+      max-width: 500px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .newsletter-text h1 span {
+      color: var(--green);
+    }
+
+
+    .newsletter-text > p {
+      max-width: 480px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =====================================
+       BENEFITS
+    ===================================== */
+
+    .benefits {
+      list-style: none;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 28px;
+    }
+
+
+    .benefits li {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 9px 13px;
+
+      border-radius: 50px;
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      color: var(--text);
+
+      font-size: 12px;
+
+      font-weight: 600;
+    }
+
+
+    .benefits i {
+      color: var(--green);
+    }
+
+
+    /* =====================================
+       RIGHT FORM
+    ===================================== */
+
+    .form-side {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 45px;
+
+      background: var(--dark);
+    }
+
+
+    .newsletter-form {
+      width: 100%;
+
+      max-width: 390px;
+    }
+
+
+    .form-icon {
+      width: 55px;
+      height: 55px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 16px;
+
+      background: rgba(63, 143, 107, 0.18);
+
+      color: #76c49d;
+
+      font-size: 21px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .newsletter-form h2 {
+      color: white;
+
+      font-size: 25px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .form-description {
+      color: #9eaaa4;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      margin-bottom: 25px;
+    }
+
+
+    /* =====================================
+       INPUT
+    ===================================== */
+
+    .input-wrapper {
+      position: relative;
+
+      margin-bottom: 13px;
+    }
+
+
+    .input-wrapper i {
+      position: absolute;
+
+      left: 16px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #819089;
+
+      font-size: 14px;
+    }
+
+
+    .input-wrapper input {
+      width: 100%;
+
+      padding: 15px 15px 15px 44px;
+
+      border-radius: 10px;
+
+      border: 1px solid #35443e;
+
+      background: #24332d;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      outline: none;
+
+      transition: .25s;
+    }
+
+
+    .input-wrapper input::placeholder {
+      color: #87938d;
+    }
+
+
+    .input-wrapper input:focus {
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 4px rgba(63, 143, 107, 0.12);
+    }
+
+
+    /* =====================================
+       BUTTON
+    ===================================== */
+
+    .subscribe-btn {
+      width: 100%;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: var(--green);
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+
+    .subscribe-btn:hover {
+      background: var(--green-dark);
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 25px rgba(63, 143, 107, 0.22);
+    }
+
+
+    .subscribe-btn:disabled {
+      cursor: not-allowed;
+    }
+
+
+    /* =====================================
+       PRIVACY
+    ===================================== */
+
+    .privacy {
+      color: #77847d;
+
+      text-align: center;
+
+      font-size: 10px;
+
+      margin-top: 14px;
+
+      line-height: 1.6;
+    }
+
+
+    .privacy i {
+      color: #72bd98;
+    }
+
+
+    /* =====================================
+       SUCCESS
+    ===================================== */
+
+    .success-message {
+      display: none;
+
+      margin-top: 15px;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      text-align: center;
+
+      background: rgba(41, 150, 107, 0.12);
+
+      color: #78d2a5;
+
+      font-size: 12px;
+
+      font-weight: 600;
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 850px) {
+
+      .newsletter-content {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-text {
+        padding: 55px 35px;
+      }
+
+      .form-side {
+        padding: 45px 35px;
+      }
+    }
+
+
+    @media (max-width: 500px) {
+
+      body {
+        padding: 15px;
+      }
+
+      .newsletter {
+        border-radius: 22px;
+      }
+
+      .newsletter-text {
+        padding: 45px 25px;
+      }
+
+      .form-side {
+        padding: 35px 25px;
+      }
+
+      .newsletter-text h1 {
+        font-size: 39px;
+      }
+
+      .benefits {
+        display: block;
+      }
+
+      .benefits li {
+        width: fit-content;
+
+        margin-bottom: 8px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <section class="newsletter">
+
+    <div class="circle-one"></div>
+    <div class="circle-two"></div>
+
+
+    <div class="newsletter-content">
+
+
+      <!-- =================================
+           LEFT CONTENT
+      ================================== -->
+
+      <div class="newsletter-text">
+
+        <div class="eyebrow">
+          Join our community
+        </div>
+
+
+        <h1>
+          Ideas worth
+          <span>reading.</span>
+        </h1>
+
+
+        <p>
+          Get thoughtful insights, practical tips, fresh ideas,
+          and useful resources delivered directly to your inbox.
+        </p>
+
+
+        <ul class="benefits">
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+            Weekly insights
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+            Useful resources
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+            Zero spam
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- =================================
+           FORM
+      ================================== -->
+
+      <div class="form-side">
+
+        <div class="newsletter-form">
+
+
+          <div class="form-icon">
+
+            <i class="fa-regular fa-envelope"></i>
+
+          </div>
+
+
+          <h2>
+            Get the newsletter
+          </h2>
+
+
+          <p class="form-description">
+            One email a week. No noise, just useful
+            content you'll actually want to read.
+          </p>
+
+
+          <form id="newsletterForm">
+
+
+            <div class="input-wrapper">
+
+              <i class="fa-regular fa-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your email address"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="subscribe-btn"
+            >
+
+              Subscribe →
+
+            </button>
+
+
+            <div
+              class="success-message"
+              id="successMessage"
+            >
+
+              <i class="fa-solid fa-circle-check"></i>
+
+              You're on the list! 🎉
+
+            </div>
+
+
+            <p class="privacy">
+
+              <i class="fa-solid fa-lock"></i>
+
+              Your email stays private. Unsubscribe anytime.
+
+            </p>
+
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    const form =
+      document.getElementById("newsletterForm");
+
+    const button =
+      form.querySelector(".subscribe-btn");
+
+    const success =
+      document.getElementById("successMessage");
+
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      button.disabled = true;
+
+      button.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
+
+
+      setTimeout(() => {
+
+        button.innerHTML =
+          '<i class="fa-solid fa-check"></i> Subscribed!';
+
+        button.style.background =
+          "#29966b";
+
+        success.style.display =
+          "block";
+
+        form.reset();
+
+
+        setTimeout(() => {
+
+          button.disabled = false;
+
+          button.innerHTML =
+            "Subscribe →";
+
+          button.style.background =
+            "";
+
+          success.style.display =
+            "none";
+
+        }, 4000);
+
+
+      }, 1000);
+
+    });
+
+  </script>
+
+</body>
+</html>
