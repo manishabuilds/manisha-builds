@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --text: #334155;
+      --muted: #64748b;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --success: #10b981;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(37, 99, 235, .25), transparent 30%),
+        linear-gradient(135deg, #0f172a 0%, #172554 100%);
+      color: white;
+      padding: 90px 20px 120px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+      right: -100px;
+      top: -100px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 50px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #bfdbfe;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: #60a5fa;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #cbd5e1;
+      font-size: 18px;
+    }
+
+    /* =========================
+       MAIN SECTION
+    ========================= */
+
+    .contact-wrapper {
+      max-width: 1150px;
+      margin: -70px auto 80px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 70px rgba(15, 23, 42, .15);
+    }
+
+    /* =========================
+       LEFT INFO
+    ========================= */
+
+    .contact-info {
+      background: var(--navy);
+      color: white;
+      padding: 45px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      background: rgba(37, 99, 235, .15);
+      border-radius: 50%;
+      right: -120px;
+      bottom: -120px;
+    }
+
+    .contact-info h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-info > p {
+      color: #94a3b8;
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-icon {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 12px;
+      background: rgba(37, 99, 235, .18);
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .info-item h4 {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
+
+    .info-item p,
+    .info-item a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .info-item a:hover {
+      color: #60a5fa;
+    }
+
+    /* =========================
+       SOCIAL
+    ========================= */
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 35px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background: rgba(255,255,255,.08);
+      text-decoration: none;
+      transition: .3s;
+    }
+
+    .socials a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-container {
+      padding: 45px;
+    }
+
+    .form-container h2 {
+      color: var(--navy);
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .form-container .subtitle {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .form-group label span {
+      color: #ef4444;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 15px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--navy);
+      background: #fff;
+      outline: none;
+      transition: .25s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .1);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, .25);
+    }
+
+    .form-note {
+      margin-top: 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .features {
+      max-width: 1150px;
+      margin: 0 auto 70px;
+      padding: 0 20px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: 16px;
+      transition: .3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, .08);
+    }
+
+    .feature-card i {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff6ff;
+      color: var(--primary);
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      color: var(--navy);
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       MAP
+    ========================= */
+
+    .map-section {
+      max-width: 1150px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .map-container {
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, .1);
+      border: 1px solid var(--border);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: var(--navy);
+      color: #94a3b8;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info,
+      .form-container {
+        padding: 35px 25px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .hero {
+        padding: 70px 20px 110px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .contact-wrapper {
+        margin-top: -60px;
+      }
+
+      .map-container {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <i class="fa-regular fa-comment-dots"></i>
+        We'd love to hear from you
+      </div>
+
+      <h1>
+        Let's start a <span>conversation.</span>
+      </h1>
+
+      <p>
+        Have a question, project idea, or need some help?
+        Send us a message and our team will get back to you.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT CARD
+  ========================== -->
+
+  <section class="contact-wrapper">
+
+    <div class="contact-grid">
+
+      <!-- LEFT SIDE -->
+
+      <div class="contact-info">
+
+        <h2>Get in touch</h2>
+
+        <p>
+          We're here to help. Reach out through any of the
+          channels below and we'll be happy to assist you.
+        </p>
+
+
+        <div class="info-item">
+
+          <div class="info-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+
+          <div>
+            <h4>Our Office</h4>
+            <p>
+              123 Business Street<br>
+              New Delhi, India 110001
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <div class="info-icon">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+919876543210">
+              +91 98765 43210
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <div class="info-icon">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:hello@example.com">
+              hello@example.com
+            </a>
+          </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <div class="info-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+
+          <div>
+            <h4>Business Hours</h4>
+            <p>
+              Monday – Friday<br>
+              9:00 AM – 6:00 PM
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- SOCIAL MEDIA -->
+
+        <div class="socials">
+
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+
+          <a href="#" aria-label="Twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- RIGHT SIDE / FORM -->
+
+      <div class="form-container">
+
+        <h2>Send us a message</h2>
+
+        <p class="subtitle">
+          Fill out the form and we'll get back to you shortly.
+        </p>
+
+
+        <form id="contactForm">
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="name">
+                Full Name <span>*</span>
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email Address <span>*</span>
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="phone">
+                Phone Number
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+91 98765 43210"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="subject">
+                Subject <span>*</span>
+              </label>
+
+              <select id="subject" name="subject" required>
+
+                <option value="">
+                  Select a subject
+                </option>
+
+                <option value="general">
+                  General Inquiry
+                </option>
+
+                <option value="support">
+                  Customer Support
+                </option>
+
+                <option value="business">
+                  Business Inquiry
+                </option>
+
+                <option value="project">
+                  Start a Project
+                </option>
+
+                <option value="other">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="message">
+              Your Message <span>*</span>
+            </label>
+
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell us how we can help..."
+              required
+            ></textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="submit-btn"
+          >
+            <i class="fa-regular fa-paper-plane"></i>
+            &nbsp; Send Message
+          </button>
+
+          <p class="form-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            Your information is safe and will never be shared.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       WHY CONTACT US
+  ========================== -->
+
+  <section class="features">
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+
+        <i class="fa-solid fa-bolt"></i>
+
+        <h3>Quick Response</h3>
+
+        <p>
+          We typically respond to inquiries within one business day.
+        </p>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <i class="fa-solid fa-headset"></i>
+
+        <h3>Expert Support</h3>
+
+        <p>
+          Get helpful answers from our experienced support team.
+        </p>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <i class="fa-solid fa-lock"></i>
+
+        <h3>Secure & Private</h3>
+
+        <p>
+          Your personal information is handled securely and privately.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAP
+  ========================== -->
+
+  <section class="map-section">
+
+    <div class="section-heading">
+
+      <h2>Find Us</h2>
+
+      <p>
+        Visit our office — we'd be happy to meet you.
+      </p>
+
+    </div>
+
+
+    <div class="map-container">
+
+      <!-- Replace the Google Maps embed URL with your location -->
+
+      <iframe
+        src="https://www.google.com/maps?q=New%20Delhi%2C%20India&output=embed"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    © 2026 Your Company. All rights reserved.
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const button = form.querySelector(".submit-btn");
+
+      const originalText = button.innerHTML;
+
+      button.innerHTML =
+        '<i class="fa-solid fa-check"></i> Message Sent!';
+
+      button.style.background = "#10b981";
+
+      form.reset();
+
+      setTimeout(() => {
+
+        button.innerHTML = originalText;
+        button.style.background = "";
+
+      }, 3000);
+
+    });
+
+  </script>
+
+</body>
+</html>
