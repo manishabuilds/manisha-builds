@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Fan Out Cards</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: #0d0d0d;
+      font-family: Arial, Helvetica, sans-serif;
+
+      overflow: hidden;
+    }
+
+    /* =========================
+       CARD STACK
+    ========================= */
+
+    .card-stack {
+      position: relative;
+
+      width: 260px;
+      height: 360px;
+
+      cursor: pointer;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card {
+      --x: 0px;
+      --rotation: 0deg;
+      --lift: 0px;
+      --scale: 1;
+
+      position: absolute;
+
+      top: 0;
+      left: 20px;
+
+      width: 220px;
+      height: 320px;
+
+      padding: 25px;
+
+      display: flex;
+      align-items: flex-end;
+
+      border-radius: 24px;
+
+      color: white;
+
+      overflow: hidden;
+
+      transform:
+        translateX(var(--x))
+        translateY(var(--lift))
+        rotate(var(--rotation))
+        scale(var(--scale));
+
+      transform-origin: 50% 100%;
+
+      transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    /* =========================
+       COLORS
+    ========================= */
+
+    .card:nth-child(1) {
+      z-index: 5;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    }
+
+    .card:nth-child(2) {
+      z-index: 4;
+      background: linear-gradient(135deg, #4776e6, #8e54e9);
+    }
+
+    .card:nth-child(3) {
+      z-index: 3;
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+
+    .card:nth-child(4) {
+      z-index: 2;
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+    }
+
+    .card:nth-child(5) {
+      z-index: 1;
+      background: linear-gradient(135deg, #654ea3, #eaafc8);
+    }
+
+    /* =========================
+       FAN OUT
+    ========================= */
+
+    .card-stack:hover .card:nth-child(1) {
+      --x: -170px;
+      --rotation: -25deg;
+    }
+
+    .card-stack:hover .card:nth-child(2) {
+      --x: -85px;
+      --rotation: -13deg;
+    }
+
+    .card-stack:hover .card:nth-child(3) {
+      --x: 0px;
+      --rotation: 0deg;
+      --lift: -25px;
+    }
+
+    .card-stack:hover .card:nth-child(4) {
+      --x: 85px;
+      --rotation: 13deg;
+    }
+
+    .card-stack:hover .card:nth-child(5) {
+      --x: 170px;
+      --rotation: 25deg;
+    }
+
+    /* =========================
+       HOVER INDIVIDUAL CARD
+    ========================= */
+
+    .card:hover {
+      --lift: -45px;
+      --scale: 1.08;
+
+      z-index: 100;
+
+      box-shadow:
+        0 35px 70px rgba(0, 0, 0, 0.55);
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .number {
+      display: block;
+
+      margin-bottom: 12px;
+
+      font-size: 13px;
+      font-weight: bold;
+
+      letter-spacing: 3px;
+
+      opacity: 0.7;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+
+      font-size: 32px;
+      line-height: 1;
+
+      letter-spacing: -1px;
+    }
+
+    .card p {
+      max-width: 170px;
+
+      font-size: 14px;
+      line-height: 1.5;
+
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* =========================
+       DECORATION
+    ========================= */
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      top: -70px;
+      right: -70px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      top: 80px;
+      right: -45px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .card-stack {
+        transform: scale(0.7);
+      }
+
+      .card-stack:hover .card:nth-child(1) {
+        --x: -120px;
+        --rotation: -22deg;
+      }
+
+      .card-stack:hover .card:nth-child(2) {
+        --x: -60px;
+        --rotation: -11deg;
+      }
+
+      .card-stack:hover .card:nth-child(3) {
+        --x: 0px;
+        --rotation: 0deg;
+        --lift: -20px;
+      }
+
+      .card-stack:hover .card:nth-child(4) {
+        --x: 60px;
+        --rotation: 11deg;
+      }
+
+      .card-stack:hover .card:nth-child(5) {
+        --x: 120px;
+        --rotation: 22deg;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card-stack">
+
+    <div class="card">
+      <div class="card-content">
+        <span class="number">01</span>
+        <h2>Discover</h2>
+        <p>Explore new ideas, places, and possibilities.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="number">02</span>
+        <h2>Create</h2>
+        <p>Turn your ideas into something meaningful.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="number">03</span>
+        <h2>Explore</h2>
+        <p>Go beyond the ordinary and find inspiration.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="number">04</span>
+        <h2>Connect</h2>
+        <p>Meet people, share ideas, and build together.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="number">05</span>
+        <h2>Inspire</h2>
+        <p>Create experiences that leave a lasting impression.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
