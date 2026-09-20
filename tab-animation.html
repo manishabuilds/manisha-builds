@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Tab Navigation</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+    }
+
+    .tabs-container {
+      width: 500px;
+      padding: 25px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Tabs */
+
+    .tabs {
+      position: relative;
+      display: flex;
+      padding: 6px;
+      background: #f1f5f9;
+      border-radius: 12px;
+    }
+
+    .tab {
+      flex: 1;
+      position: relative;
+      padding: 13px 10px;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .tab.active {
+      color: #ffffff;
+    }
+
+    /* Sliding background */
+
+    .indicator {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: calc(25% - 3px);
+      height: calc(100% - 12px);
+
+      background: linear-gradient(
+        135deg,
+        #6366f1,
+        #a855f7
+      );
+
+      border-radius: 9px;
+
+      transition: transform 0.4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* Content */
+
+    .content {
+      display: none;
+      text-align: center;
+      padding: 40px 20px 20px;
+      animation: slideUp 0.4s ease;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .content h2 {
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="tabs-container">
+
+    <div class="tabs">
+
+      <div class="indicator"></div>
+
+      <button class="tab active" data-tab="home">
+        Home
+      </button>
+
+      <button class="tab" data-tab="about">
+        About
+      </button>
+
+      <button class="tab" data-tab="projects">
+        Projects
+      </button>
+
+      <button class="tab" data-tab="contact">
+        Contact
+      </button>
+
+    </div>
+
+    <div class="content active" id="home">
+      <h2>Welcome 👋</h2>
+      <p>
+        Build beautiful and interactive websites
+        with modern web technologies.
+      </p>
+    </div>
+
+    <div class="content" id="about">
+      <h2>About Me</h2>
+      <p>
+        I'm a frontend developer who loves creating
+        modern user interfaces.
+      </p>
+    </div>
+
+    <div class="content" id="projects">
+      <h2>My Projects 🚀</h2>
+      <p>
+        Explore my latest HTML, CSS, JavaScript
+        and React projects.
+      </p>
+    </div>
+
+    <div class="content" id="contact">
+      <h2>Let's Connect ✨</h2>
+      <p>
+        Have a project idea? Let's build something
+        amazing together.
+      </p>
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".content");
+    const indicator = document.querySelector(".indicator");
+
+    tabs.forEach((tab, index) => {
+
+      tab.addEventListener("click", () => {
+
+        // Remove active class
+        tabs.forEach(t => t.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
+
+        // Add active class
+        tab.classList.add("active");
+
+        const target = tab.dataset.tab;
+
+        document
+          .getElementById(target)
+          .classList.add("active");
+
+        // Move indicator
+        indicator.style.transform =
+          `translateX(${index * 100}%)`;
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>

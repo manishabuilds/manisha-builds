@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Animation</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #312e81);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      display: flex;
+      gap: 15px;
+      height: 400px;
+    }
+
+    .card {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 20px;
+      cursor: pointer;
+
+      background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+      );
+
+      transition: flex 0.6s ease,
+                  transform 0.6s ease;
+    }
+
+    .card:nth-child(2) {
+      background: linear-gradient(
+        135deg,
+        #06b6d4,
+        #3b82f6
+      );
+    }
+
+    .card:nth-child(3) {
+      background: linear-gradient(
+        135deg,
+        #f97316,
+        #ef4444
+      );
+    }
+
+    .card:nth-child(4) {
+      background: linear-gradient(
+        135deg,
+        #22c55e,
+        #14b8a6
+      );
+    }
+
+    .card:hover {
+      flex: 3;
+      transform: translateY(-8px);
+    }
+
+    .content {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      color: white;
+
+      opacity: 0;
+      transform: translateY(20px);
+
+      transition: 0.4s ease;
+    }
+
+    .card:hover .content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .number {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin: 6px 0;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        height: 300px;
+        gap: 8px;
+      }
+
+      .card:hover {
+        flex: 2.5;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .content {
+        left: 15px;
+        bottom: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+      <div class="content">
+        <span class="number">01</span>
+        <h2>HTML</h2>
+        <p>Build the structure</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="content">
+        <span class="number">02</span>
+        <h2>CSS</h2>
+        <p>Style your website</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="content">
+        <span class="number">03</span>
+        <h2>JS</h2>
+        <p>Add interactions</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="content">
+        <span class="number">04</span>
+        <h2>React</h2>
+        <p>Build modern apps</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
